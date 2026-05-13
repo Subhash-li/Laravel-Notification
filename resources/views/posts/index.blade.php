@@ -30,9 +30,10 @@
     }
 </style>
 <body>
+    <p>{{ auth()->user()->name }}</p>
     <h2>Notifications</h2>
 
-    @foreach(\App\Models\User::find(1)->unreadNotifications as $notification)
+    @foreach(\App\Models\User::find(auth()->id())->unreadNotifications as $notification)
 
     <div style="border:1px solid black; padding:10px; margin-bottom:10px;">
 

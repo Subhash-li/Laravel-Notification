@@ -29,12 +29,12 @@ class PostController extends Controller
         ]);
 
         $post = Post::create([
-            'user_id' => 1,
+            'user_id' => auth()->id(),
             'title' => $validated['title'],
             'content' => $validated['content']
         ]);
 
-        $user = User::find(1);
+        $user = User::find(auth()->id());
         $user->notify(new PostCreatedNotification($post));
 
         return redirect('/posts');

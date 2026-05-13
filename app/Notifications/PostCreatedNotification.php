@@ -19,12 +19,20 @@ class PostCreatedNotification extends Notification
 
     public function via(object $notifiable)
     {
-        return ['database'];
+        return ['database', 'mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
+    public function toMail($notifiable)
+    {
+        return (new MailMessage)
+            ->subject('New Post Created')
+            ->greeting('Hello!')
+            ->line('A new post was created.')
+            ->line('Post Title: ' . $this->post->title)
+            ->action('View Posts', url('/posts'))
+            ->line('Thank you for using Laravel Forum!');
+    }
+
     public function toArray($notifiable)
     {
         return [
