@@ -25,13 +25,22 @@ class PostController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:255',
-            'content' => 'required'
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
         ]);
+
+        $imagePaths = [];
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('post', 'public');
+            $imagePaths = [$imagePath];
+        }
 
         $post = Post::create([
             'user_id' => auth()->id(),
             'title' => $validated['title'],
-            'content' => $validated['content']
+            'content' => $validated['content'],
+            'image' => $imagePaths
         ]);
 
         $user = User::find(auth()->id());

@@ -41,7 +41,7 @@
 
     <h1>Create Post</h1>
 
-    <form action="/posts" method="POST">
+    <form action="/posts" method="POST" enctype="multipart/form-data">
 
         @csrf
 
@@ -62,6 +62,15 @@
                 cols="50"
                 placeholder="Write your post..."
             ></textarea>
+        </div>
+
+        <br>
+
+        <div>
+            <input
+                type="file"
+                name="image"
+            >
         </div>
 
         <br>

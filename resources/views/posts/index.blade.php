@@ -64,7 +64,7 @@
             <p>
                 {{ Str::limit($post->content, 100) }}
             </p>
-
+            
         </div>
 
     @endforeach
